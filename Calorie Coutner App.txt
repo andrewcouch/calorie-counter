@@ -1,0 +1,89 @@
+Calorie Coutner App
+Using Angular - HTML5 Persistance (plugable to REST API storage)
+Simple like Trail Wallet. 
+
+
+Add Food
+	(need some way to pick from stored foods) 
+	Name
+	Calories
+		-Opt 1: Direct. "I ate X calories."
+		-Opt 2: Calculated. "Calories for 100g, I ate 50g of it."
+	Category
+	Checkmark "Store for later": Allows to build up common food list.
+	Date with optional time
+		Defaults to today with Bootstrap calendar control to pick other days.
+
+View Day
+	See foods on a day. Calculate calorie totals with message.
+	Average for timeperiod. 
+	Go to specific day. ("Paging style")
+
+View stored foods
+	Filter (by name, by category)
+	Edit (does not change any "eaten" instances of this food)
+	Delete
+
+View categories
+	Add new
+	Delete (copy to "general" all foods in this list)
+	Edit names
+
+View Plan
+	Set timeframe
+	Set goal per day
+meta:{
+	uid:"",
+	version:"1.0",
+}
+diet:[
+	day:{
+		date:"",
+		total:"",
+		eaten:[
+			<food>{
+				id:"",
+				name:"",
+				cal:"",
+				time:"",
+				cat:"",
+				amt:"",
+				unit:"",
+				}
+			]
+		}
+],
+pantry:[
+	<stored>{
+		id:"",
+		name:"",
+		cat:"",
+		base_cal:"",
+		base_amt"",
+		base_unit:"",
+	}
+],
+categories:[
+	<cat>{
+		name:"",
+		desc:"",
+		color:"",
+		general:"",
+	}
+],
+plan:{
+	name:"",
+	start_date:"",
+	end_date:"",
+	goal_per_day:"",
+}
+
+Default Categories:
+	Protein
+	Dairy
+	Fruits
+	Vegetables
+	Grains
+	General (general:true)
+	Drinks
+	Snacks
