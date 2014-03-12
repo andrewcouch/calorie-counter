@@ -2,10 +2,20 @@ var calCounterApp = angular.module('calCounterApp', ['LocalStorageModule']);
  
 calCounterApp.controller('calCounterCtrl', ['$scope','localStorageService','$http', 
 	function ($scope,lsService,$http) {
+		$scope.eaten = lsService.get("eaten");
+
+		if (!$scope.eaten || $scope.eaten.length==0)
+		{
 		$scope.eaten = [
-			{id:"1",name:"Andy's Cereal",cal:"234",cat:"Grains",amt:"60",unit:"g",},
-			{id:"2",name:"Dried Cranberries",cal:"100",cat:"Fruit",amt:"30",unit:"g",},
-		];
+				{id:"1",name:"Andy's Cereal",cal:"234",cat:"Grains",amt:"60",unit:"g",},
+				{id:"2",name:"Dried Cranberries",cal:"100",cat:"Fruit",amt:"30",unit:"g",},
+			];
+		}
+
+		 $http.get('/app/stored-food.json').success(function(data) {
+			$scope.storedfood = data;
+			console.log(data);
+		});
 		$scope.selectedfood = null;
 		$scope.foodunit = "-";
 		$scope.foodamt = 1;
@@ -34,10 +44,20 @@ calCounterApp.controller('calCounterCtrl', ['$scope','localStorageService','$htt
 					amt:$scope.foodamt,					
 				});
 			}
-			$scope.reset();
+			$scope.resetFood();
 			updateLocalStorage();
 		}
-		$scope.reset = function()
+		$scope.addFoodFromStored = function(food)
+		{
+			$scope.eaten.push({
+				name:food.name, 
+				cal:food.cal,
+				unit:food.unit, 
+				amt:food.amt,					
+			});
+			updateLocalStorage();
+		}
+		$scope.resetFood = function()
 		{
 			$scope.foodname = '';
 			$scope.foodcal = '';

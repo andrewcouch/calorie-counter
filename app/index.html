@@ -39,7 +39,14 @@ placeholder="calories"/>
                 <input type="submit" value="add"/>
             </form>
         </div>
-
+        <div class="storedfood">
+            <ul class="foodlist">
+                <li ng-repeat="food in storedfood">
+                    <span class="label">{{food.name}}</span><span class="cal">{{food.cal}}</span><span class="tools"><span ng-click="addFoodFromStored(food)">add</span></span>                    
+                </li>
+            </ul>
+        </div>
+        <p>{{storedfood}}</p>
         <p>{{seelocalstorage()}}</p>
     </body>
 </html>

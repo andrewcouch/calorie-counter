@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "name": "Andy's Cereal",
+        "cal": "234",
+        "cat": "Grains",
+        "amt": "60",
+        "unit": "g"
+    },
+    {
+        "id": "2",
+        "name": "Dried Cranberries",
+        "cal": "100",
+        "cat": "Fruit",
+        "amt": "30",
+        "unit": "g"
+    },
+    {
+        "id": "3",
+        "name": "Milk",
+        "cal": "46",
+        "cat": "Dairy",
+        "amt": "100",
+        "unit": "ml"
+    }
+]
