@@ -5,7 +5,10 @@
         "cal": "234",
         "cat": "Grains",
         "amt": "60",
-        "unit": "g"
+        "unit": "g",
+        "type": "direct",
+        "amttotal":"",
+        "server":true
     },
     {
         "id": "2",
@@ -13,7 +16,10 @@
         "cal": "100",
         "cat": "Fruit",
         "amt": "30",
-        "unit": "g"
+        "unit": "g",
+        "type": "relative",
+        "amttotal":"100",
+        "server":true
     },
     {
         "id": "3",
@@ -21,6 +27,9 @@
         "cal": "46",
         "cat": "Dairy",
         "amt": "100",
-        "unit": "ml"
+        "unit": "ml",
+        "type": "relative",
+        "amttotal":"100",
+        "server":true
     }
 ]

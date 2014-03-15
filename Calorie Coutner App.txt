@@ -37,7 +37,7 @@ meta:{
 	version:"1.0",
 }
 diet:[
-	day:{
+	<day>{
 		date:"",
 		total:"",
 		eaten:[

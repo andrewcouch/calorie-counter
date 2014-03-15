@@ -1,0 +1,77 @@
+/* app css stylesheet */
+@accentcolor : #ddd;
+
+body {
+  padding-top: 20px;
+}
+h1{
+	text-align:center;
+}
+.foodlist 
+{
+	.tools span{
+		margin:0 0 0 5px;
+		cursor:pointer;
+	}
+}
+.header, .daytotal{
+	text-align:center;
+	font-size:125%;	
+	.highlight{
+		font-weight:bold;
+	}
+	.glyphicon{
+		cursor:pointer;
+	}
+}
+.daytotal{
+	background:#ddf;
+}
+#newfood,#storedfood,#eaten,#report{
+	border: 1px solid #AAAAAA;
+	border-radius: 5px;
+	margin-bottom: 15px;
+	table{
+		background:white;
+	}
+	.header{
+		padding: 5px 10px;
+	}
+}
+#report{
+	.frame{
+		height:200px;
+		position:relative;
+		margin:5px;
+		overflow:hidden;
+		.bar{
+			background:#ddf;
+			border-top:1px solid #777;
+			float:right;
+			width:35px;
+			text-align:center;
+			position:absolute;
+			bottom:0;
+		}
+	}
+}
+#newfood{
+	padding: 15px;
+	#foodname{
+		margin:0 0 5px;
+	}
+	.formrow{
+		margin:0 0 10px;
+		.control-label{
+			width:100px;
+			margin-right:5px;
+			display:inline-block;
+		}
+	}
+	input[type="radio"]{
+		margin:0 5px 0 0;
+	}
+	input[type="radio"] + label{
+		margin:0 10px 0 0;
+	}
+}

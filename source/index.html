@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" ng-app="calCounterApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Calorie Counter</title>
+        <link rel="stylesheet" href="resource/css/calorie-counter-custom.min.css">
+        <link rel="stylesheet" href="resource/css/bootstrap.min.css">
+        <script src="resource/js/vendor/angular/angular.js"></script>
+        <script src="resource/js/vendor/angular/angular-local-storage.min.js"></script>
+        <script src="resource/js/controllers.js"></script>
+    </head>
+    <body ng-controller="calCounterCtrl">
+        <div class="container">
+            <h1>Calorie Counter</h1>       
+            <div class="row">
+                <div class="col-md-4 xs-col-12">
+                    <div id="eaten">
+                        <div class="header">
+                            <span ng-click="changeDate(-1)" class="glyphicon glyphicon-arrow-left pull-left"></span>
+                            Eaten: <span class="highlight">{{activeday.date | date:'yyyy-MM-dd'}}</span>
+                            <span ng-click="changeDate(1)" class="glyphicon glyphicon-arrow-right pull-right"></span>
+                        </div> 
+        
+                        <table class="foodlist table table-striped">
+                            <tr ng-hide="activeday.eaten.length" class="warning"><td>Nothing eaten</td></tr>                        
+                            <tr ng-repeat="food in activeday.eaten" ng-class="{active: food == selectedfood}">                            
+                                <td class="label">{{makeFoodLabel(food)}}</td><td class="cal">{{food.cal}}</td><td class="tools"><span ng-click="editFood(food)" class="
+                                glyphicon glyphicon-pencil"></span><span ng-click="removeFood(food)" class="glyphicon glyphicon-trash"></span></td>
+                            </tr>
+                        </table>
+                        <p class="daytotal">Day's Total: <span class="highlight">{{activeday.total}}</span></p>
+                        <p><span ng-click="clearDay()">Remove All</span></p>
+                        <p><span ng-click="clearAll()">Remove Past</span></p>
+                    </div>
+                </div>
+                <div class="xs-col-12 col-md-4">
+                    <div id="storedfood">
+                        <div class="header">Stored Food:</div>
+                        <table class="foodlist table table-striped">
+                            <tr ng-hide="storedfood().length" class="warning"><td>No stored foods</td></tr>
+                            <tr ng-repeat="food in storedfood()">
+                                <td class="label">{{makeFoodLabel(food)}}</td><td class="cal">{{food.cal}}</span><td class="tools"><span ng-click="addFoodFromStored(food)" class="glyphicon glyphicon-plus"></span>
+                                <span ng-click="editFood(food)" class="glyphicon glyphicon-pencil" ng-hide="food.server"></span>
+                                <span ng-click="removeStoredFood(food)" class="glyphicon glyphicon-trash" ng-hide="food.server"></span>
+                            </td>                    
+                            </tr>
+                        </table>
+                    </div>
+                </div>                
+                <div class="col-md-4 xs-col-12">
+                    <div id="newfood">
+                        <form ng-submit="addFood()" role="form">
+                            <div class="form-group">
+                                <input type="text" id="foodname" ng-model="foodname" size="30" placeholder="add new food name" class='form-control'/>
+                                <select ng-model="foodcat" id="foodcat" class='form-control'>
+                                    <option value="Protein">Protein</option>
+                                    <option value="Dairy">Dairy</option>
+                                    <option value="Fruit">Fruit</option>
+                                    <option value="Vegetable">Vegetable</option>
+                                    <option value="Misc">Misc</option>
+                                    <option value="Drink">Drink</option>
+                                    <option value="Snack">Snack</option>
+                                    <option value="Grains">Grains</option>                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="radio" ng-model="entrytype" value="direct" id="rd-direct"/><label for="rd-direct">Direct</label>
+                                <input type="radio" ng-model="entrytype" value="relative" id="rd-relative"/><label for="rd-relative">Relative</label>
+                            </div>   
+                            <div class="form-group form-horizontal">
+                                <div class="formrow">
+                                    <span class="control-label">Calories:</span><input type="text" id="foodcal" ng-model="foodcal" size="3"/>
+                                </div>
+                                <div ng-show="entrytype=='relative'" class="formrow">
+                                    <span class="control-label">in this Amount: </span><input type="text" id="foodamttotal" ng-model="foodamttotal" size="3"/> {{foodunit}}
+                                </div>
+                                <div class="formrow">
+                                    <span class="control-label">Amount Eaten: </span><input type="text" id="foodamt" ng-model="foodamt" size="3"/>
+                                    <select ng-model="foodunit" id="foodunit">
+                                        <option value="-">-</option>                    
+                                        <option value="g">g</option>
+                                        <option value="ml">ml</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="button" value="add to eaten" ng-click="addFood()" class="btn"/>
+                            <input type="button" value="save to stored" ng-click="saveFoodToStored()" class="btn"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="report">
+                        <div class="header">Overview:</div>                       
+                        <div class="frame">
+                            <div ng-repeat="report in generateReport() track by report.date" class="bar" ng-style="report.style">{{report.total}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>{{storedfood()}}</p>
+                    <p>{{seelocalstorage()}}</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
